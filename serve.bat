@@ -1,0 +1,1 @@
+bin\mdbook.exe serve --open
