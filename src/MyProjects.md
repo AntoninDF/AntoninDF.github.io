@@ -6,7 +6,7 @@ I present some of my work here, hoping you'll enjoy having a look at it.
 
 Mostly on Unity, but not only. I like to make shaders combining simple effects into complex results, making use of lots of maths.
 
-## [Procedural Mesh Generation](./projects/ProceduralGeneration)
+## [Procedural Mesh Generation](./projects/ProceduralGeneration.md)
 
 Making meshes with code is quite fun and goes far beyond the classic (yet reliable !) heightmap terrain.
 
