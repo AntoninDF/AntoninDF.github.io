@@ -1,5 +1,5 @@
 # Summary
 
-- [About me](./chapter_1.md)
-- [My projects](./chapter_1.md)
-- [Contact me](./chapter_1.md)
+- [About me](./AboutMe.md)
+- [My projects](./MyProjects.md)
+- [Contact me](./ContactMe.md)
