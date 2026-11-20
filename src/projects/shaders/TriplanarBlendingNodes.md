@@ -2,7 +2,7 @@
 
 ## What is triplanar blending ?
 
-This page is not so much about presenting triplanar blending, since it's been explained by so many people already? But in short, it's a way to quickly project a texture onto 3D geometry without needing to unwrap it's UVs first. Instead, it uses the fragment's position and normal to determine where to sample the texture and from which angle.
+This page is not so much about presenting triplanar blending, since it's been explained by so many people already. But in short, it's a way to quickly project a texture onto 3D geometry without needing to unwrap it's UVs first. Instead, it uses the fragment's position and normal to determine where to sample the texture and from which angle.
 For more details, [Ben Golus](https://bgolus.medium.com/) (a great technical artist and graphics programmer) wrote [this paper](https://bgolus.medium.com/normal-mapping-for-a-triplanar-shader-10bf39dca05a) on the subject.
 
 <center><img src="../../images/TriplanarBlendingNodes/TriplanarExamples.png" alt="Examples of triplanar projection in Unity" height="400"/></center>
@@ -29,13 +29,13 @@ The solution is actually quite simple. We have to **generate 3 different UV coor
 
 To generate the 3 UV coordinates, we simply take an input position XYZ, and output separately ZY, XZ and XY. The input position defaults to the world position to ensure ease of use and for the effect to be applied the same way on every object by default. We also provide tiling and offset controls by default in case we want to specify these uniformly accross the 3 texture coordinates. Of course we can still control them individually afterwards. The offset parameter isn't often needed, but it doesn't cost much to add it for some specific use cases.
 
-<img src="../../Images/TriplanarBlendingNodes/TriplanarUVContent.png" alt="The subgraph responsible for generating the 3 UV coordinates">
+<img src="../../images/TriplanarBlendingNodes/TriplanarUVContent.png" alt="The subgraph responsible for generating the 3 UV coordinates">
 
 ## Blending the effects
 
 Once we've used the given UV coordinates to generate our effect, we should get 3 corresponding color values. Just like with classic triplanar blending, we use the normal vector and blending factor (here named "Sharpness") to control the blending.
 
-<img src="../../Images/TriplanarBlendingNodes/TriplanarBlenderInputs.png" alt="A close look at the inputs for the triplanar blender subgraph">
+<img src="../../images/TriplanarBlendingNodes/TriplanarBlenderInputs.png" alt="A close look at the inputs for the triplanar blender subgraph">
 
 To blend everything, we use a standard method. We multiply each color by a factor, say O (for opacity), and sum them together.
 To compute O, we take the normal and proceed like so :
@@ -47,7 +47,7 @@ To compute O, we take the normal and proceed like so :
 
 The output is the final blended value
 
-![The content of the triplanar blender subgraph's content](../../Images/TriplanarBlendingNodes/TriplanarBlenderContent.png)
+![The content of the triplanar blender subgraph's content](../../images/TriplanarBlendingNodes/TriplanarBlenderContent.png)
 
 ## How to generate the effect
 
@@ -57,12 +57,12 @@ To avoid flooding the graph, and to make sure we don't have to apply changes thr
 
 The following graph uses this method to generate a starry skybox, with a subgraph dedicated to the star effect. Position is used as normal since the normal isn't really provided with the skydome.
 
-![An overview of the final, complete graph containing the UV provider, the main effect's subgraphs, and the final blender](../../Images/TriplanarBlendingNodes/CompleteGraph.png)
-![A screenshot of the starry skybox effect generated using triplanar blending](../../Images/TriplanarBlendingNodes/Skybox.png)
+![An overview of the final, complete graph containing the UV provider, the main effect's subgraphs, and the final blender](../../images/TriplanarBlendingNodes/CompleteGraph.png)
+![A screenshot of the starry skybox effect generated using triplanar blending](../../images/TriplanarBlendingNodes/Skybox.png)
 
 In this effect, if you look closely, you can still see a bit of the blending effect happening in some places. It could be gotten rid of with a higher blending factor, or simply by removing the blending and just using hard borders. But it serves as a nice example of how this can be used.
 
-![A screenshot of the starry skybox effect generated using triplanar blending, annotated to show where the seams are visible](../../Images/TriplanarBlendingNodes/SkyboxAnnotated.png)
+![A screenshot of the starry skybox effect generated using triplanar blending, annotated to show where the seams are visible](../../images/TriplanarBlendingNodes/SkyboxAnnotated.png)
 
 ## Do you need the files ?
 
