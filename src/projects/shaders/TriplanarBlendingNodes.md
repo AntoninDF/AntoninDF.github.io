@@ -63,3 +63,10 @@ The following graph uses this method to generate a starry skybox, with a subgrap
 In this effect, if you look closely, you can still see a bit of the blending effect happening in some places. It could be gotten rid of with a higher blending factor, or simply by removing the blending and just using hard borders. But it serves as a nice example of how this can be used.
 
 ![A screenshot of the starry skybox effect generated using triplanar blending, annotated to show where the seams are visible](../../Images/TriplanarBlendingNodes/SkyboxAnnotated.png)
+
+## Do you need the files ?
+
+The two subgraphs as well as the starry skybox scene are available via a UnityPackage.
+[Find it here](https://github.com/AntoninDF/AntoninDF.github.io/blob/main/src/resources/TriplanarBlendingNodes/TriplanarBlendingNodes_URP_6000.3.18f1.unitypackage)
+It was tested on Unity URP 6000.3.18f1, but is simple enough so that it should be working on any version and render pipeline.
+Don't hesitate to [contact me](../../ContactMe.md) if you have questions, remarks, need help or if you just want to chat about it !
