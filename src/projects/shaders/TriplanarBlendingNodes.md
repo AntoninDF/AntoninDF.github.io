@@ -67,6 +67,8 @@ In this effect, if you look closely, you can still see a bit of the blending eff
 ## Do you need the files ?
 
 The two subgraphs as well as the starry skybox scene are available via a UnityPackage.
+
 [Find it here](https://github.com/AntoninDF/AntoninDF.github.io/blob/main/src/resources/TriplanarBlendingNodes/TriplanarBlendingNodes_URP_6000.3.18f1.unitypackage)
+
 It was tested on Unity URP 6000.3.18f1, but is simple enough so that it should be working on any version and render pipeline.
 Don't hesitate to [contact me](../../ContactMe.md) if you have questions, remarks, need help or if you just want to chat about it !
