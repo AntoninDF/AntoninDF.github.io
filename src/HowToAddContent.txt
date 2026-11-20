@@ -1,0 +1,6 @@
+# How to add content to the website
+
+- Add the markdown dedicated to the new content
+- Reference it in SUMMARY.md
+- Reference it in the corresponding parent page
+- Reference it in "About me" if it's good enough to be in the home page.
