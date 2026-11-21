@@ -24,6 +24,7 @@ Then normalize it to make sure we always have a unit vector.
 
 Now we have our light direction, we can simply compute it's contribution to the surface using simple phong lighting.
 
+<center><img src="../../images/OrbittingLight/LightDirectionNodes.png" alt="Nodes making up the orbitting light vector" height="300"></center>
 ![GIF showing the resulting rotating vector]()
 
 
@@ -36,13 +37,13 @@ Now we have our light direction, we can simply compute it's contribution to the 
 Given the surface normal N, we compute the incident diffuse light _Id_ by calculating the dot product of the normal with the negated light direction vector :
 
 ```Id = Dot(N, -L)```
-<center><img src="MISSING" alt="Nodes for the dot product of the light and normal vectors"></center>
+<center><img src="../../images/OrbittingLight/DiffuseNodes.png" alt="Nodes for the dot product of the light and normal vectors" height="300"></center>
 
 We get Id in a [-1;1] range, since both N and L are of unit length.
 It should then be clamped between 0 and 1 to avoid negative light contribution.
 We can then multiply _Id_ by the diffuse light color.
 
-<center><img src="MISSING" alt="Image of the diffuse lighting result"></center>
+<center><img src="../../images/OrbittingLight/DiffuseLightingShowcase.gif" alt="Image of the diffuse lighting result" height="300"></center>
 
 **Specular lighting**
 
@@ -74,3 +75,4 @@ Combining our orbitting light direction vector and phong lighting, we get a nice
 
 <center><img src="MISSING" alt="Final result on different meshes"></center>
 <center><img src="MISSING" alt="Final result in a stylized artistic direction"></center>
+
