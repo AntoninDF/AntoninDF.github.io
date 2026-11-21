@@ -32,6 +32,7 @@ Now we have our light direction, we can simply compute it's contribution to the 
 <center><img src="MISSING" alt="Image of the phong lighting result"></center>
 
 **Diffuse lighting**
+
 Given the surface normal N, we compute the incident diffuse light _Id_ by calculating the dot product of the normal with the negated light direction vector :
 
 ```Id = Dot(N, -L)```
@@ -44,6 +45,7 @@ We can then multiply _Id_ by the diffuse light color.
 <center><img src="MISSING" alt="Image of the diffuse lighting result"></center>
 
 **Specular lighting**
+
 Now, if we want it, we can add specular lighting.
 
 <center><img src="MISSING" alt="Image of specular lighting only, without diffuse"></center>
