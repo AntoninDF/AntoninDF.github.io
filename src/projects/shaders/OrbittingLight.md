@@ -14,6 +14,7 @@ So once we find the directional light's direction, we must apply it to the surfa
 
 ## The math behind
 
+### Finding the light direction 
 Rotations are all about trigonometry. To generate a rotating direction vector, we make use of Sine and Cosine, and make sure that they are out of sync so that the rotation appears random.
 Using the time variable T, we can take for example :
 
@@ -23,12 +24,51 @@ Then normalize it to make sure we always have a unit vector.
 
 Now we have our light direction, we can simply compute it's contribution to the surface using simple phong lighting.
 
-Given the surface normal N, we compute the incident light I by calculating the dot product of the normal with the negated light direction vector :
+![GIF showing the resulting rotating vector]()
 
-```I = Dot(N, -L)```
 
-We get I in a [-1;1] range, since both N and L are of unit length.
+### Phong lighting
+
+<center><img src="MISSING" alt="Image of the phong lighting result"></center>
+
+**Diffuse lighting**
+Given the surface normal N, we compute the incident diffuse light _Id_ by calculating the dot product of the normal with the negated light direction vector :
+
+```Id = Dot(N, -L)```
+<center><img src="MISSING" alt="Nodes for the dot product of the light and normal vectors"></center>
+
+We get Id in a [-1;1] range, since both N and L are of unit length.
 It should then be clamped between 0 and 1 to avoid negative light contribution.
+We can then multiply _Id_ by the diffuse light color.
 
+<center><img src="MISSING" alt="Image of the diffuse lighting result"></center>
 
-WIP
+**Specular lighting**
+Now, if we want it, we can add specular lighting.
+
+<center><img src="MISSING" alt="Image of specular lighting only, without diffuse"></center>
+
+First we find the reflected light vector :
+```R = 2*Dot(-L, N) + L```
+
+<center><img src="MISSING" alt="Schematic of vector reflection"></center>
+
+Then the dot product between R and the camera view vector C (which should be per pixel and taking FOV into account, rather than uniform for the camera object)
+
+```S = Dot(R, C)```
+<center><img src="MISSING" alt="Schematic of the light vector reflecting on a surface and hitting the camera"></center>
+
+And finally, we exponentiate it by the specular intensity Ks.
+
+```S = Dot(R, C)^Ks```
+
+We should clamp this value to the [0;1] range to avoid undesired behaviour, multiply it by the specular color, and finally add it to the diffuse lighting.
+
+<center><img src="MISSING" alt="Image of the final phong lighting result"></center>
+
+## The final effect
+
+Combining our orbitting light direction vector and phong lighting, we get a nice basis for a dynamic lighting effect. We can then extend it with further artistic choices to make it look better.
+
+<center><img src="MISSING" alt="Final result on different meshes"></center>
+<center><img src="MISSING" alt="Final result in a stylized artistic direction"></center>
