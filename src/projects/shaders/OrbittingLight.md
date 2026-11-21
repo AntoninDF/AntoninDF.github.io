@@ -14,4 +14,21 @@ So once we find the directional light's direction, we must apply it to the surfa
 
 ## The math behind
 
-ToDo
+Rotations are all about trigonometry. To generate a rotating direction vector, we make use of Sine and Cosine, and make sure that they are out of sync so that the rotation appears random.
+Using the time variable T, we can take for example :
+
+```L = Vector3(Sin(T*3.5), Cos(T*4.5), Sin(T*5.5))```
+
+Then normalize it to make sure we always have a unit vector.
+
+Now we have our light direction, we can simply compute it's contribution to the surface using simple phong lighting.
+
+Given the surface normal N, we compute the incident light I by calculating the dot product of the normal with the negated light direction vector :
+
+```I = Dot(N, -L)```
+
+We get I in a [-1;1] range, since both N and L are of unit length.
+It should then be clamped between 0 and 1 to avoid negative light contribution.
+
+
+WIP
