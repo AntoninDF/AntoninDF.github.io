@@ -1,1 +1,17 @@
 # Fake orbitting light
+
+## The expected effect
+
+Great lighting can add so much value to your 3D assets, but it can also be a bit tricky to get a precise lighting on some specific assets. For example, rim lights or hair highlights can be faked through shaders for better artistic control. In this article, we'll see how we can simulate the effect of a light orbitting around the mesh.
+
+![Image of the final shader result](MISSING)
+
+## How it works
+
+We'll treat the light as if it was a directional light. Since directional lights don't need positions, we only need to find it's direction. What's convenient about it is that it works for any mesh out of the box, whereas simulating a point light, for instance, would require a position. But since we do not have data on the whole mesh in the fragment shader, we wouldn't be able to prevent the point light intersecting with the mesh, and creating undesired effects (unless we put it far enough, but it would yield an inconsistent lighting).
+
+So once we find the directional light's direction, we must apply it to the surface's color.
+
+## The math behind
+
+ToDo
