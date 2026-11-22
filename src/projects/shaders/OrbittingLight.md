@@ -4,7 +4,7 @@
 
 Great lighting can add so much value to your 3D assets, but it can also be a bit tricky to get a precise lighting on some specific assets. For example, rim lights or hair highlights can be faked through shaders for better artistic control. In this article, we'll see how we can simulate the effect of a light orbitting around the mesh.
 
-![Image of the final shader result](MISSING)
+<center><img src="../../images/OrbittingLight/ResultShowcase.gif" alt="GIF of the final shader result" height="300"></center>
 
 ## How it works
 
@@ -24,24 +24,28 @@ Then normalize it to make sure we always have a unit vector.
 
 Now we have our light direction, we can simply compute it's contribution to the surface using simple phong lighting.
 
-<center><img src="../../images/OrbittingLight/LightDirectionNodes.png" alt="Nodes making up the orbitting light vector" height="300"></center>
-![GIF showing the resulting rotating vector]()
+<center><img src="../../images/OrbittingLight/LightDirectionNodes.png" alt="Nodes making up the orbitting light vector" height="200">
+<img src="../../images/OrbittingLight/RotatingVector.gif" alt="Rotating vector showing the generated light direction" height="200"></center>
 
 
 ### Phong lighting
 
-<center><img src="MISSING" alt="Image of the phong lighting result"></center>
+<center><img src="../../images/OrbittingLight/PhongLighting.png" alt="Image of the phong lighting result" height="200"></center>
 
 **Diffuse lighting**
 
-Given the surface normal N, we compute the incident diffuse light _Id_ by calculating the dot product of the normal with the negated light direction vector :
+Given the surface normal N, we compute the incident diffuse light _Id_ by calculating the dot product of the negated light direction vector with the normal :
 
 ```Id = Dot(N, -L)```
-<center><img src="../../images/OrbittingLight/DiffuseNodes.png" alt="Nodes for the dot product of the light and normal vectors" height="300"></center>
 
 We get Id in a [-1;1] range, since both N and L are of unit length.
 It should then be clamped between 0 and 1 to avoid negative light contribution.
-We can then multiply _Id_ by the diffuse light color.
+
+<center><img src="../../images/OrbittingLight/DiffuseNodes.png" alt="Nodes for the dot product of the light and normal vectors" height="300"></center>
+
+We can then multiply _Id_ by the diffuse light color. Here we also multiply it by the alpha to allow control over the diffuse lighting's contribution.
+
+<center><img src="../../images/OrbittingLight/DiffuseColorNodes.png" alt="Image of the diffuse color nodes" height="300"></center>
 
 <center><img src="../../images/OrbittingLight/DiffuseLightingShowcase.gif" alt="Image of the diffuse lighting result" height="300"></center>
 
@@ -49,17 +53,18 @@ We can then multiply _Id_ by the diffuse light color.
 
 Now, if we want it, we can add specular lighting.
 
-<center><img src="MISSING" alt="Image of specular lighting only, without diffuse"></center>
+<center><img src="../../images/OrbittingLight/SpecularLightingShowcase.gif" alt="Image of specular lighting only, without diffuse"></center>
 
 First we find the reflected light vector :
-```R = 2*Dot(-L, N) + L```
+```R = 2*Dot(-L, N)*N + L```
 
-<center><img src="MISSING" alt="Schematic of vector reflection"></center>
+<center><img src="../../images/OrbittingLight/ReflectedLightVectorNodes.png" alt="Nodes for vector reflection"></center>
 
-Then the dot product between R and the camera view vector C (which should be per pixel and taking FOV into account, rather than uniform for the camera object)
+<center><img src="../../images/OrbittingLight/ReflectedVectorSchematic.png" alt="Schematic of vector reflection"></center>
+
+Then the dot product between R and the camera view direction vector C.
 
 ```S = Dot(R, C)```
-<center><img src="MISSING" alt="Schematic of the light vector reflecting on a surface and hitting the camera"></center>
 
 And finally, we exponentiate it by the specular intensity Ks.
 
@@ -67,12 +72,15 @@ And finally, we exponentiate it by the specular intensity Ks.
 
 We should clamp this value to the [0;1] range to avoid undesired behaviour, multiply it by the specular color, and finally add it to the diffuse lighting.
 
-<center><img src="MISSING" alt="Image of the final phong lighting result"></center>
+<center><img src="../../images/OrbittingLight/SpecularLightingNodes.png" alt="Nodes making up the specular intensity value" height="200"></center>
+<center><img src="../../images/OrbittingLight/SpecularColorNodes.png" alt="Nodes making up the specular intensity value" height="200"></center>
+
+<center><img src="../../images/OrbittingLight/PhongLighting.png" alt="Image of the final phong lighting result"></center>
 
 ## The final effect
 
 Combining our orbitting light direction vector and phong lighting, we get a nice basis for a dynamic lighting effect. We can then extend it with further artistic choices to make it look better.
 
-<center><img src="MISSING" alt="Final result on different meshes"></center>
-<center><img src="MISSING" alt="Final result in a stylized artistic direction"></center>
+<center><img src="../../images/OrbittingLight/ResultShowcase.gif" alt="Final result on different meshes"></center>
+<center><img src="../../images/OrbittingLight/BatShowcase.gif" alt="Final result in a stylized artistic direction" height="700"></center>
 
