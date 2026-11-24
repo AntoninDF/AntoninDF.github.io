@@ -9,3 +9,8 @@ This site is mostly there to share my work or other gamedev-related things I fin
 If you enjoy it's content, feel free to reach out and talk about it !
 
 ♡
+
+
+[![Artstation link](./images/AboutMe/ArtstationLink.png)](https://www.artstation.com/tonindc)
+
+[![GitHub link](./images/AboutMe/GitLink.png)](https://github.com/AntoninDF)
